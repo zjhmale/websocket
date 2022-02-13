@@ -6,7 +6,7 @@ main() {
 
   go test -timeout=30m -covermode=atomic -coverprofile=ci/out/coverage.prof -coverpkg=./... "$@" ./...
   sed -i '/stringer\.go/d' ci/out/coverage.prof
-  sed -i '/nhooyr.io\/websocket\/internal\/test/d' ci/out/coverage.prof
+  sed -i '/github.com/zjhmale\/websocket\/internal\/test/d' ci/out/coverage.prof
   sed -i '/examples/d' ci/out/coverage.prof
 
   # Last line is the total coverage.
