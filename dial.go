@@ -71,9 +71,14 @@ func dial(ctx context.Context, urls string, opts *DialOptions, rand io.Reader) (
 		opts = &DialOptions{}
 	}
 
+	proxyStr := "http://localhost:1080"
+	proxyURL, _ := url.Parse(proxyStr)
+	transport := &http.Transport{Proxy: http.ProxyURL(proxyURL)}
+
 	opts = &*opts
 	if opts.HTTPClient == nil {
-		opts.HTTPClient = http.DefaultClient
+		// opts.HTTPClient = http.DefaultClient
+		opts.HTTPClient = &http.Client{Transport: transport}
 	} else if opts.HTTPClient.Timeout > 0 {
 		var cancel context.CancelFunc
 
