@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -71,6 +72,7 @@ func dial(ctx context.Context, urls string, opts *DialOptions, rand io.Reader) (
 		opts = &DialOptions{}
 	}
 
+	log.Println("we are using proxy here")
 	proxyStr := "http://localhost:1080"
 	proxyURL, _ := url.Parse(proxyStr)
 	transport := &http.Transport{Proxy: http.ProxyURL(proxyURL)}
